@@ -100,16 +100,10 @@ run_script() {
 }
 
 # 执行所有脚本
-run_script "基本测试" "https://bench.sh" 
-run_script "GB5 测试" "https://bash.icu/gb5" "1\n"
-run_script "FIO 测试" "https://raw.githubusercontent.com/vpslog/benchframe/main/fio.sh"
-run_script "三网测速" "https://bench.im/hyperspeed" '\n\n'
-run_script "教育网测速" "https://bench.im/hyperspeed" '6\n\n'
+run_script "性能测试" "https://github.com/masonr/yet-another-bench-script/blob/master/yabs.sh" 
+run_script "流媒体解锁测试" "https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh" "4\n"
 run_script "线路测试" "https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh"
-run_script "流媒体解锁测试" "https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh" "1\n"
-run_script "回程路由测试" "https://raw.githubusercontent.com/vpslog/benchframe/main/besttarce.sh"
-# 此脚本似乎有问题，不能自动退出
-# run_script "https://raw.githubusercontent.com/i-abc/Speedtest/main/speedtest.sh" '2\n'
+run_script "下载速度测试" "https://raw.githubusercontent.com/i-abc/Speedtest/main/speedtest.sh" '2\n'
 
 # 提交结果，注意 cat 命令输出时包含了空字节（null byte），而 Bash 不支持在命令替换中处理空字节，使用 tr 命令来删除文件中的空字节
 CONTENT=$(cat "${script_outputs[@]}" |  tr -d '\000' |  sed 's/\x1b\[[0-9;]*m//g')
