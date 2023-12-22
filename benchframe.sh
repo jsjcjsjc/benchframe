@@ -6,8 +6,8 @@ sleep 1
 clear
 # 打印开始信息
 echo "测试脚本聚合框架 V1.0 by VPSLOG"
-echo "Github：https://github.com/vpslog/benchframe"
-echo "运行：bash <(curl https://raw.githubusercontent.com/vpslog/benchframe/main/benchframe.sh)"
+echo "Github：https://github.com/jsjcjsjc/benchframe"
+echo "运行：bash <(curl https://raw.githubusercontent.com/jsjcjsjc/benchframe/main/benchframe.sh)"
 echo  -e  "教程：https://blog.vpslog.org/blog/benchframe/\n"
 # 记录脚本开始时间
 start_time=$(date +%s)
@@ -53,7 +53,7 @@ if [ "$USE_SCREEN" = true ]; then
   SCREEN_ARGS=("${ALL_ARGS[@]/-d}")
 
   # 下载 benchframe.sh
-  curl -sL "https://raw.githubusercontent.com/vpslog/benchframe/main/benchframe.sh" > benchframe.sh
+  curl -sL "https://raw.githubusercontent.com/jsjcjsjc/benchframe/main/benchframe.sh" > benchframe.sh
 
   # 使用 screen 运行 benchframe.sh，并传递所有参数
   screen -dmS bench bash -c "bash benchframe.sh ${SCREEN_ARGS[*]}"
@@ -103,14 +103,14 @@ run_script() {
 run_script "性能测试" "https://github.com/masonr/yet-another-bench-script/blob/master/yabs.sh" 
 run_script "流媒体解锁测试" "https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh" "4\n"
 run_script "线路测试" "https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh"
-# run_script "下载速度测试" "https://raw.githubusercontent.com/i-abc/Speedtest/main/speedtest.sh" '2\n'
+run_script "下载速度测试" "https://raw.githubusercontent.com/i-abc/Speedtest/main/speedtest.sh" '2\n'
 
 # 提交结果，注意 cat 命令输出时包含了空字节（null byte），而 Bash 不支持在命令替换中处理空字节，使用 tr 命令来删除文件中的空字节
 CONTENT=$(cat "${script_outputs[@]}" |  tr -d '\000' |  sed 's/\x1b\[[0-9;]*m//g')
 
 # 提交结果并提取返回值，注意 \n 不能直接写，直接提交似乎会有问题
 # 将内容保存到临时文件
-echo -e "测试脚本聚合框架 by VPSLOG"$'\n'"Github：https://github.com/vpslog/benchframe"$'\n'"运行：bash <(curl https://raw.githubusercontent.com/vpslog/benchframe/main/benchframe.sh)"$'\n'"教程：https://blog.vpslog.org/blog/benchframe/"$'\n\n'"$CONTENT" > temp_result_file.txt
+echo -e "测试脚本聚合框架 by VPSLOG"$'\n'"Github：https://github.com/jsjcjsjc/benchframe"$'\n'"运行：bash <(curl https://raw.githubusercontent.com/jsjcjsjc/benchframe/main/benchframe.sh)"$'\n'"教程：https://blog.vpslog.org/blog/benchframe/"$'\n\n'"$CONTENT" > temp_result_file.txt
 
 # 使用 curl 提交内容
 RESULT=$(curl -Fc=@temp_result_file.txt "$PASTEBIN_URL")
